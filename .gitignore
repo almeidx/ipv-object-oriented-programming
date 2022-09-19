@@ -1,0 +1,7 @@
+fichas/*
+!fichas/*.cpp
+
+examples/*
+!examples/*.cpp
+
+.txt
