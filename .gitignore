@@ -1,13 +1,7 @@
-fichas/*
-!fichas/**/*.cpp
-!fichas/*.cpp
-!fichas/**/*.hpp
-!fichas/*.hpp
-
 examples/*
-!examples/**/.cpp
-!examples/*.cpp
-!examples/**/.hpp
-!examples/*.hpp
+!examples/*.*
 
-.txt
+fichas/ficha*/*
+!fichas/ficha*/*.*
+
+*.txt

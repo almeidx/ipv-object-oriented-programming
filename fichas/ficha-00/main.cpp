@@ -1,4 +1,4 @@
-#include "ficha-0.hpp"
+#include "main.hpp"
 
 int main() {
 	histograma(123);
