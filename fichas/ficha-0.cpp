@@ -1,12 +1,7 @@
-#include <iostream>
-#include <string>
-
-using namespace std;
-
-void histograma(int n);
+#include "ficha-0.hpp"
 
 int main() {
-	histograma(251);
+	histograma(123);
 
 	return 0;
 }
@@ -29,12 +24,54 @@ int main() {
 		2 5 1
  */
 void histograma(int n) {
+	int n1;
+
+	for (int line = 9; line > 0; line--) {
+		n1 = invert_number(n);
+
+		while (n1 > 0) {
+			if (n1 % 10 >= line) {
+				cout << "* ";
+			} else {
+				cout << "- ";
+			}
+
+			n1 /= 10;
+		}
+
+		cout << endl;
+	}
+
+	// Pretty-print number at the bottom
+	n1 = invert_number(n);
+	while (n1 > 0) {
+		cout << n1 % 10 << " ";
+		n1 /= 10;
+	}
+
+	cout << endl;
+}
+
+int invert_number(int n) {
+	int inverted = 0;
+
+	while (n > 0) {
+		inverted = inverted * 10 + n % 10;
+		n /= 10;
+	}
+
+	return inverted;
+}
+
+// Other implementation using strings
+void histograma_string(int n) {
 	string str = to_string(n);
 
-	for (int line = 10; line > 0; line--) {
+	for (int line = 9; line > 0; line--) {
 		for (auto &c : str) {
-			cout <<  ' ';
-			if (line > (int)c) {
+			int val = (int)(c - '0');
+
+			if (line > val) {
 				cout << "- ";
 			} else {
 				cout << "* ";
@@ -44,5 +81,9 @@ void histograma(int n) {
 		cout << endl;
 	}
 
-	cout << n << endl;
+	for (auto &c : str) {
+		cout << c << " ";
+	}
+
+	cout << endl;
 }
