@@ -15,6 +15,8 @@ class Person {
 			name = _name;
 			city = _city;
 			age = _age;
+
+			cout << "Person " << _name << " created" << endl;
 		}
 
 		~Person() {
@@ -22,10 +24,13 @@ class Person {
 		}
 
 		void print() {
-			cout << "Name: " << name << endl;
-			cout << "City: " << city << endl;
-			cout << "Age: " << (int)age << endl;
+			cout << "Name: " << name << endl << "City: " << city << endl << "Age: " << (int)age << endl;
 		}
+
+		bool operator==(const Person &p) {
+			return name == p.name && city == p.city && age == p.age;
+		}
+
 };
 
 #endif // PESSOA_HPP

@@ -7,13 +7,13 @@ using namespace std;
 
 class Vehicle {
 	public:
-	int year;
-	string brand;
-	Vehicle();
-	Vehicle(int year_, string brand_);
-	~Vehicle();
+		int year;
+		string brand;
+		Vehicle();
+		Vehicle(int year_, string brand_);
+		~Vehicle();
 
-	void Show();
+		void Show();
 };
 
 

@@ -6,7 +6,7 @@ int main(void) {
 	m.from_file(PEOPLE_TXT);
 	m.print();
 
-	m.remove("João");
+	m.remove("Jose Francisco");
 
 	m.save_to_file("modified.txt");
 

@@ -1,37 +1,20 @@
 #ifndef MANAGER_HPP
 #define MANAGER_HPP
 
-#include <iostream>
-#include <list>
-#include <iterator>
 #include <fstream>
-#include <sstream>
-
+#include "../utils.hpp"
 #include "person.hpp"
 
 #define PEOPLE_TXT "people.txt"
 
-using namespace std;
-
-// https://stackoverflow.com/a/46931770/11252146
-list<string> split(const string &s, char delim) {
-    list<string> result;
-    stringstream ss(s);
-    string item;
-
-    while (getline(ss, item, delim)) {
-        result.push_back(item);
-    }
-
-    return result;
-}
-
 class Manager {
 	public:
 		list<Person> people;
+
 		Manager() {
 			cout << "Manager created" << endl;
 		}
+
 		~Manager() {
 			cout << "Manager destroyed" << endl;
 		}
@@ -55,7 +38,7 @@ class Manager {
 
 			string line;
 			while (getline(file, line)) {
-				list<string> tokens = split(line, ';');
+				list<string> tokens = Utils::split(line, ';');
 
 				string city = tokens.front();
 				tokens.pop_front();
@@ -65,7 +48,6 @@ class Manager {
 				int age;
 				if (!tokens.empty()) {
 					age = stoi(tokens.front());
-					add_person(name, city, age);
 				} else {
 					age = 18;
 				}
@@ -88,13 +70,7 @@ class Manager {
 
 		bool remove(Person *P) {
 			bool changed = false;
-			people.remove_if([&P, &changed](Person &p) {
-				if (p.name == P->name && p.city == P->city && p.age == P->age) {
-					changed = true;
-					return true;
-				}
-				return false;
-			});
+			people.remove(*P);
 			return changed;
 		}
 

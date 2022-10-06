@@ -2,6 +2,9 @@
 #define UTILS_HPP
 
 #include <iostream>
+#include <sstream>
+#include <list>
+#include <iterator>
 #include <time.h>
 
 using namespace std;
@@ -27,6 +30,19 @@ class Utils {
 			}
 
 			cout << endl;
+		}
+
+		// https://stackoverflow.com/a/46931770/11252146
+		static list<string> split(const string &s, char delim) {
+			list<string> result;
+			stringstream ss(s);
+			string item;
+
+			while (getline(ss, item, delim)) {
+				result.push_back(item);
+			}
+
+			return result;
 		}
 };
 
