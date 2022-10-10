@@ -1,0 +1,13 @@
+<DADOS>
+	<PESSOA>
+		<NOME>Jose Miguel</NOME>
+		<IDADE>18</IDADE>
+		<MORADA>
+			<CIDADE>Lisboa</CIDADE>
+		</MORADA>
+	</PESSOA>
+	<PESSOA>
+		<NOME>Pedrito De Portugal</NOME>
+		<IDADE>65</IDADE>
+	</PESSOA>
+</DADOS>

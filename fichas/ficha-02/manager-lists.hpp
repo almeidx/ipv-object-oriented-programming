@@ -2,17 +2,15 @@
 #define MANAGER_HPP
 
 #include <fstream>
-#include <map>
-
 #include "../utils.hpp"
 #include "person.hpp"
 
 #define PEOPLE_TXT "people.txt"
 
 class Manager {
-	map<string, list<Person *>> cities;
-
 	public:
+		list<Person> people;
+
 		Manager() {
 			cout << "Manager created" << endl;
 		}
@@ -22,11 +20,13 @@ class Manager {
 		}
 
 		bool add_person(string nome, string cidade, int idade) {
-			return add_person(new Person(nome, cidade, idade));
+			Person p(nome, cidade, idade);
+			people.push_back(p);
+			return true;
 		}
 
 		bool add_person(Person *P) {
-			cities[P->city].push_back(P);
+			people.push_back(*P);
 			return true;
 		}
 
@@ -63,34 +63,24 @@ class Manager {
 		}
 
 		void print() {
-			for (const auto &pair : cities) {
-			    list<Person *>people = pair.second;
-
-				for (auto person : people) {
-					person->print();
-				}
+			for (auto &person : people) {
+				person.print();
 			}
 		}
 
 		bool remove(Person *P) {
-			cities[P->city].remove(P);
-			delete P;
-			return true;
+			bool changed = false;
+			people.remove(*P);
+			return changed;
 		}
 
 		bool remove(string name) {
-			for (auto &pair : cities) {
-				list<Person *>people = pair.second;
-
-				for (auto person : people) {
-					if (person->name == name) {
-						remove(person);
-						// delete person;
-						return true;
-					}
+			for (auto &person : people) {
+				if (person.name == name) {
+					remove(&person);
+					return true;
 				}
 			}
-
 			return false;
 		}
 
@@ -100,12 +90,8 @@ class Manager {
 				return false;
 			}
 
-			for (auto &pair : cities) {
-				list<Person *>people = pair.second;
-
-				for (auto person : people) {
-					file << person->city << ";" << person->name << ";" << (int)person->age << endl;
-				}
+			for (auto &person : people) {
+				file << person.city << ";" << person.name << ";" << (int)person.age << endl;
 			}
 
 			file.close();
@@ -114,16 +100,11 @@ class Manager {
 		}
 
 		Person *search_person(string nome) {
-			for (auto &pair : cities) {
-				list<Person *>people = pair.second;
-
-				for (auto person : people) {
-					if (person->name == nome) {
-						return person;
-					}
+			for (auto &person : people) {
+				if (person.name == nome) {
+					return &person;
 				}
 			}
-
 			return NULL;
 		}
 
@@ -131,21 +112,17 @@ class Manager {
 			string city;
 			int count = 0;
 
-			for (auto &pair : cities) {
-				list<Person *>people = pair.second;
-
-				for (auto &person : people) {
-					int city_count = 0;
-					for (auto &person2 : people) {
-						if (person->city == person2->city) {
-							city_count++;
-						}
+			for (auto &person : people) {
+				int city_count = 0;
+				for (auto &person2 : people) {
+					if (person.city == person2.city) {
+						city_count++;
 					}
+				}
 
-					if (city_count > count) {
-						city = person->city;
-						count = city_count;
-					}
+				if (city_count > count) {
+					city = person.city;
+					count = city_count;
 				}
 			}
 
