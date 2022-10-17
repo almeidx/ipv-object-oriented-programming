@@ -3,5 +3,6 @@ examples/*
 
 fichas/ficha*/*
 !fichas/ficha*/*.*
+!fichas/ficha*/Makefile
 
 *.txt
