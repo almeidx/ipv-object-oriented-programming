@@ -3,22 +3,18 @@
 using namespace std;
 
 class Product {
-	public:
-		int price;
-		string name;
+public:
+	int price;
+	string name;
 
-		Product(int _price, string _name) {
-			price = _price;
-			name = _name;
-		}
+	Product(int _price, string _name) {
+		price = _price;
+		name = _name;
+	}
 
-		~Product() {
-			cout << "Product " << name << " destroyed" << endl;
-		}
+	~Product() { cout << "Product " << name << " destroyed" << endl; }
 
-		int operator+(Product p) {
-			return price + p.price;
-		}
+	int operator+(Product p) { return price + p.price; }
 };
 
 int main(void) {

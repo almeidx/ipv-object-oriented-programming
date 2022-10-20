@@ -10,9 +10,7 @@ Vehicle::Vehicle(int year_, string brand_) {
 	brand = brand_;
 }
 
-Vehicle::~Vehicle() {
-	cout << "Vehicle " << brand << " destroyed" << endl;
-}
+Vehicle::~Vehicle() { cout << "Vehicle " << brand << " destroyed" << endl; }
 
 void Vehicle::Show() {
 	cout << "Year: " << year << endl;

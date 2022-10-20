@@ -5,40 +5,40 @@
 using namespace std;
 
 int main() {
-    cout << "Hello world!" << endl;
+	cout << "Hello world!" << endl;
 
-    Bank BES("BES-NOVO BANCO");
+	Bank BES("BES-NOVO BANCO");
 
-    Person *P1 = new Person("Ze", "2343");
+	Person *P1 = new Person("Ze", "2343");
 
-    BES.add_account(P1);
+	BES.add_account(P1);
 
-    Account *C = new Account(P1);
+	Account *C = new Account(P1);
 
-    BES.add_account(C);
-    BES.print();
+	BES.add_account(C);
+	BES.print();
 
-    BES.deposit("2343", 10);
+	BES.deposit("2343", 10);
 
-    P1 = new Person("Goncalo", "12");
+	P1 = new Person("Gonçalo", "12");
 
-    BES.add_account(P1);
+	BES.add_account(P1);
 
-    C = new Account(P1);
+	C = new Account(P1);
 
-    BES.add_account(C);
-    BES.deposit("12", 100);
+	BES.add_account(C);
+	BES.deposit("12", 100);
 
-    cout << "Capital Total do Bank = " << BES.bank_total() << endl;
+	cout << "Capital Total do Bank = " << BES.bank_total() << endl;
 
-    Account *CSalgado = BES.get_largest_account();
+	Account *CSalgado = BES.get_largest_account();
 
-    if (CSalgado) {
-        CSalgado->print();
-        //delete CSalgado; //??????
-    }
+	if (CSalgado) {
+		CSalgado->print();
+		// delete CSalgado; //??????
+	}
 
-    BES.save_to_file("ola.txt");
+	BES.save_to_file("ola.txt");
 
-    return 0;
+	return 0;
 }

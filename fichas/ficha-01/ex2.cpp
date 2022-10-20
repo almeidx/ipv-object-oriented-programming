@@ -1,9 +1,9 @@
+#include <algorithm>
+#include <fstream>
 #include <iostream>
 #include <iterator>
 #include <list>
-#include <fstream>
 #include <sstream>
-#include <algorithm>
 
 #define WORDS_FILENAME "words.txt"
 
@@ -31,7 +31,7 @@ int main(void) {
 	}
 
 	// a)
- 	list<string> words;
+	list<string> words;
 
 	// b)
 	string word;
@@ -69,15 +69,12 @@ int main(void) {
 	}
 
 	// i)
-	int small_words = count_if(words.begin(), words.end(), [](string &word) {
-		return word.size() < 5;
-	});
+	int small_words = count_if(words.begin(), words.end(), [](string &word) { return word.size() < 5; });
 	cout << "Small words: " << small_words << endl;
 
 	// j)
-	for_each(words.begin(), words.end(), [](string &word) {
-		transform(word.begin(), word.end(), word.begin(), ::toupper);
-	});
+	for_each(words.begin(), words.end(),
+			 [](string &word) { transform(word.begin(), word.end(), word.begin(), ::toupper); });
 
 	// k)
 	ofstream big_words_file("words_out.txt", ios::trunc);

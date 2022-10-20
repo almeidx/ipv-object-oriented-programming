@@ -6,31 +6,24 @@
 using namespace std;
 
 class Person {
-	public:
-		string name;
-		string city;
-		uint8_t age;
+public:
+	string name;
+	string city;
+	uint8_t age;
 
-		Person(string _name, string _city, uint8_t _age) {
-			name = _name;
-			city = _city;
-			age = _age;
+	Person(string _name, string _city, uint8_t _age) {
+		name = _name;
+		city = _city;
+		age = _age;
 
-			cout << "Person " << _name << " created" << endl;
-		}
+		cout << "Person " << _name << " created" << endl;
+	}
 
-		~Person() {
-			cout << "Person " << name << " destroyed" << endl;
-		}
+	~Person() { cout << "Person " << name << " destroyed" << endl; }
 
-		void print() {
-			cout << "Name: " << name << endl << "City: " << city << endl << "Age: " << (int)age << endl;
-		}
+	void print() { cout << "Name: " << name << endl << "City: " << city << endl << "Age: " << (int)age << endl; }
 
-		bool operator==(const Person &p) {
-			return name == p.name && city == p.city && age == p.age;
-		}
-
+	bool operator==(const Person &p) { return name == p.name && city == p.city && age == p.age; }
 };
 
 #endif // PESSOA_HPP

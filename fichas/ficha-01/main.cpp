@@ -7,7 +7,7 @@ int main(void) {
 	// int a = Utils::read_int("a: ");
 	// cout << "a = " << a << endl;
 
-	#define VEC_SIZE 1000
+#define VEC_SIZE 1000
 
 	int vec[VEC_SIZE];
 	Utils::gen_rand_vec(vec, VEC_SIZE);

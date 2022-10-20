@@ -6,15 +6,14 @@
 using namespace std;
 
 class Vehicle {
-	public:
-		int year;
-		string brand;
-		Vehicle();
-		Vehicle(int year_, string brand_);
-		~Vehicle();
+public:
+	int year;
+	string brand;
+	Vehicle();
+	Vehicle(int year_, string brand_);
+	~Vehicle();
 
-		void Show();
+	void Show();
 };
-
 
 #endif // CLASSES_HPP

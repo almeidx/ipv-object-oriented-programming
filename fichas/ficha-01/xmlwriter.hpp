@@ -1,8 +1,8 @@
 #ifndef XMLWRITER_HPP
 #define XMLWRITER_HPP
 
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <iterator>
 #include <list>
 
@@ -14,9 +14,7 @@ class XMLWriter {
 	int indent;
 	fstream *file;
 
-	void write_indents() {
-		*file << string(indent, '\t');
-	}
+	void write_indents() { *file << string(indent, '\t'); }
 
 	bool document_started() {
 		if (!file) {
@@ -26,79 +24,79 @@ class XMLWriter {
 		return true;
 	}
 
-	public:
-		XMLWriter() {
-			cout << "Created " << __FUNCTION__ << endl;
+public:
+	XMLWriter() { cout << "Created " << __FUNCTION__ << endl; }
+
+	~XMLWriter() { cout << "Destroyed " << __FUNCTION__ << endl; }
+
+	void WriteStartDocument(string ficheiro) {
+		if (file) {
+			cerr << "[" << __FUNCTION__ << "] Document has already been started" << endl;
+			return;
 		}
 
-		~XMLWriter() {
-			cout << "Destroyed " << __FUNCTION__ << endl;
+		filename = ficheiro;
+		indent = 0;
+
+		file = new fstream(filename, ios::app);
+	}
+
+	void WriteEndDocument() {
+		if (!document_started())
+			return;
+
+		if (filename.empty()) {
+			cerr << "Called " << __FUNCTION__ << " but document has not been started" << endl;
+			return;
 		}
 
-		void WriteStartDocument(string ficheiro) {
-			if (file) {
-				cerr << "[" << __FUNCTION__ << "] Document has already been started" << endl;
-				return;
-			}
-
-			filename = ficheiro;
-			indent = 0;
-
-			file = new fstream(filename, ios::app);
+		if (!tags.empty()) {
+			cerr << "Called " << __FUNCTION__ << " but document still has unclosed tags" << endl;
+			return;
 		}
 
-		void WriteEndDocument() {
-			if (!document_started()) return;
+		file->close();
+		delete file;
+	}
 
-			if (filename.empty()) {
-				cerr << "Called " << __FUNCTION__ << " but document has not been started" << endl;
-				return;
-			}
+	void WriteElementString(string el, string valor) {
+		if (!document_started())
+			return;
 
-			if (!tags.empty()) {
-				cerr << "Called " << __FUNCTION__ << " but document still has unclosed tags" << endl;
-				return;
-			}
+		write_indents();
 
-			file->close();
-			delete file;
+		*file << "<" << el << ">" << valor << "</" << el << ">" << endl;
+	}
+
+	void WriteStartElement(string el) {
+		if (!document_started())
+			return;
+
+		write_indents();
+
+		*file << "<" << el << ">" << endl;
+
+		tags.push_front(el);
+		indent++;
+	}
+
+	void WriteEndElement() {
+		if (!document_started())
+			return;
+
+		if (tags.empty()) {
+			cerr << "Called " << __FUNCTION__ << " but the tags list is empty" << endl;
+			return;
 		}
 
-		void WriteElementString(string el, string valor) {
-			if (!document_started()) return;
+		indent--;
+		write_indents();
 
-			write_indents();
+		string tag_name = tags.front();
+		tags.pop_front();
 
-			*file << "<" << el << ">" << valor << "</" << el << ">" << endl;
-		}
-
-		void WriteStartElement(string el) {
-			if (!document_started()) return;
-
-			write_indents();
-
-			*file << "<" << el << ">" << endl;
-
-			tags.push_front(el);
-			indent++;
-		}
-
-		void WriteEndElement() {
-			if (!document_started()) return;
-
-			if (tags.empty()) {
-				cerr << "Called " << __FUNCTION__ << " but the tags list is empty" << endl;
-				return;
-			}
-
-			indent--;
-			write_indents();
-
-			string tag_name = tags.front();
-			tags.pop_front();
-
-			*file << "</" << tag_name << ">" << endl;
-		}
+		*file << "</" << tag_name << ">" << endl;
+	}
 };
 
 #endif // XMLWRITER_HPP
