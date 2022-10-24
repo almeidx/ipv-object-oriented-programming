@@ -6,4 +6,8 @@ fichas/ficha*/*
 !fichas/ficha*/*.*
 !fichas/ficha*/Makefile
 
+motor/*
+!motor/*.*
+!motor/Makefile
+
 *.txt
